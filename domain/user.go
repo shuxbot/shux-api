@@ -15,12 +15,12 @@ type (
 		Date   time.Time `json:"date"`
 	}
 	User struct {
-		UserId         string    `json:"id,omitempty" firestore:"-"`
-		Description    string    `json:"description,omitempty" firestore:"description"`
-		Points         float64   `json:"points,omitempty" firestore:"points"`
-		Warnings       int64     `json:"warnings,omitempty" firestore:"warnings"`
-		WarningsRecord []Warning `json:"warnings_record,omitempty" firestore:"warnings_record"`
-		Tickets        int64     `json:"tickets,omitempty" firestore:"tickets"`
-		Flags          int64     `json:"flags,omitempty" firestore:"flags"`
+		UserId         string    `json:"id,omitempty"`
+		Description    string    `json:"description,omitempty"`
+		Points         float64   `json:"points,omitempty"`
+		Warnings       int64     `json:"warnings,omitempty"`
+		WarningsRecord []Warning `json:"warnings_record,omitempty"`
+		Tickets        int64     `json:"tickets,omitempty"`
+		Flags          int64     `json:"flags,omitempty"`
 	}
 )

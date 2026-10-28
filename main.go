@@ -16,15 +16,15 @@ import (
 )
 
 func main() {
-	// Firestore client
-	firestoreClient := persistance.Client
+	// Postgres connection pool
+	pool := persistance.Pool
 
 	// Initialize all repos and apps
-	userRepo := infrastructure.NewFirestoreUserRepo(firestoreClient)
-	channelRepo := infrastructure.NewFirestoreChannelRepo(firestoreClient)
-	roleRepo := infrastructure.NewFirestoreRoleRepo(firestoreClient)
-	serverRepo := infrastructure.NewFirestoreServerRepo(firestoreClient)
-	adminRepo := infrastructure.NewFirestoreAdminRepo(firestoreClient)
+	userRepo := infrastructure.NewPostgresUserRepo(pool)
+	channelRepo := infrastructure.NewPostgresChannelRepo(pool)
+	roleRepo := infrastructure.NewPostgresRoleRepo(pool)
+	serverRepo := infrastructure.NewPostgresServerRepo(pool)
+	adminRepo := infrastructure.NewPostgresAdminRepo(pool)
 
 	userApp := application.NewUserApp(userRepo)
 	channelApp := application.NewChannelApp(channelRepo)

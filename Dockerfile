@@ -8,7 +8,6 @@ RUN go build -o /bin/shux-api ./main.go
 
 FROM alpine:latest
 
-COPY --from=build /shux-api/secrets/serviceaccount.json /secrets/serviceaccount.json
 COPY --from=build /bin/shux-api /bin/shux-api
 
 ENV API_PORT="3000"

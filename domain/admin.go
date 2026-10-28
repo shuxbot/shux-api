@@ -6,8 +6,8 @@ type (
 		Login(username string) (Admin, error)
 	}
 	Admin struct {
-		AdminId  string `json:"id,omitempty" firestore:"-"`
-		Username string `json:"username,omitempty" firestore:"username"`
-		Password string `json:"password,omitempty" firestore:"password"`
+		AdminId  string `json:"id,omitempty"`
+		Username string `json:"username,omitempty"`
+		Password string `json:"password,omitempty"`
 	}
 )

@@ -91,19 +91,19 @@ curl --location 'https://shux.adrephos.com/api/v1/auth/login' \
 # Running the API
 
 > [!IMPORTANT]  
-> To run the API you'll need to get a Firebase [Service Account](https://firebase.google.com/support/guides/service-accounts).
+> To run the API you'll need a running PostgreSQL instance. The schema is created automatically on startup.
 
 ### Environment variables
 
 In order for the API to work properly, these enviroment variables need to be set in your system:
 
-| Key             | Description                                   |
-|-----------------|-----------------------------------------------|
-| ACCESS_SECRET   | Secret to sign access tokens                  |
-| REFRESH_SECRET  | Secret to sign refresh tokens                 |
-| REGISTER_SECRET | Secret to allow registration                  |
-| SHUX_API_SA     | Absolute path of you Service Account location |
-| API_PORT        | Port in which the API will run                |
+| Key             | Description                                              |
+|-----------------|-----------------------------------------------------------|
+| ACCESS_SECRET   | Secret to sign access tokens                              |
+| REFRESH_SECRET  | Secret to sign refresh tokens                              |
+| REGISTER_SECRET | Secret to allow registration                               |
+| DATABASE_URL    | Postgres connection string (e.g. postgres://user:pass@host:5432/shux) |
+| API_PORT        | Port in which the API will run                             |
 
 ### Local run
 
@@ -135,13 +135,10 @@ $ go build -o <custom_name>
 > [!NOTE]  
 > Remember to [install Docker](https://go.dev/doc/install) if you haven't already.
 
-To build the image from the Dockerfile, clone the repository, create a directory `secrets`, and store your
-Service Account there with the name `serviceaccount.json`:
+Clone the repository:
 ```
 $ git clone https://github.com/shuxbot/shux-api
 $ cd shux-api
-$ mkdir secrets
-$ cp path/to/your/serviceaccount.json ./secrets/serviceaccount.json
 ```
 
 Now you can build the Docker image:
@@ -149,19 +146,15 @@ Now you can build the Docker image:
 $ docker buildx build -t <image_name> .
 ```
 
-And run the docker:
+And run the docker, pointing it at your Postgres instance:
 ```
 $ docker run -e ACCES_SECRET="secret" \
 -e REFRESH_SECRET="secret" \
 -e REGISTER_SECRET="secret" \
--e SHUX_API_SA="/secrets/serviceaccount.json" \
+-e DATABASE_URL="postgres://user:pass@host:5432/shux" \
 -p 3000:3000 --name <container_name> <image_name>
 ```
 *You can see other ways to set [enviroment variables](https://docs.docker.com/engine/reference/commandline/run/#env).*
-
-> [!WARNING]  
-> This way to containerize is intended for private container registries; to upload the image to a public
-> registry, you will need to store your Service Account in a [volume](https://docs.docker.com/storage/volumes/).
 
 ## Examples
 

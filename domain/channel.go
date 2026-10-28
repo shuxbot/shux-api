@@ -10,7 +10,7 @@ type (
 		Create(c *Channel, ServerId string) error
 	}
 	Channel struct {
-		ChannelId string `json:"id,omitempty" firestore:"-"`
-		Flags     int64  `json:"flags,omitempty" firestore:"flags"`
+		ChannelId string `json:"id,omitempty"`
+		Flags     int64  `json:"flags,omitempty"`
 	}
 )
